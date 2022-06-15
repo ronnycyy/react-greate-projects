@@ -1,0 +1,99 @@
+
+React Hook快速入门
+
+什么是React Hook？
+
+    16.8 新增特性   
+        使用state  在函数组件中
+    hook 
+        钩子
+    使我们再非class的情况下，可以使用更多的react特性
+    
+    完全可选
+    100%向后兼容
+    现在可用
+    没有计划从react中移除calss
+    对react概念理解没有影响。  props state context
+
+为什么要用Hook？
+    代码更加简洁
+    上手更加简单
+        react上手不容易，主要是？
+            1.生命周期难以理解，很难熟练应用，
+            2.Redux 状态管理，概念非常多，难以理解，中文文档
+            3.高阶组件理解起来不容易，必须掌握，似懂非懂
+            4.优秀的解决方案，都在react社区
+        Hook学习成本降低
+            1.生命周期可以不用学。
+            2.高阶组件不用学，
+            3.redux也不再是必需品，mobx上手非常容易
+    开发体验非常好
+        可以让函数组组件维护内部的状态
+
+单向数据流
+    和vue双向数据绑定不同，  自上而下单向数据流方式(react)   state/props 组件重新渲染(父组件变化->下边的所有子组件重新渲染)
+    重新渲染
+        class render
+        function  整个函数重新执行
+    函数组件
+    function Component(){
+        // 返回jsx结构
+        return <div></div>
+    }
+    hook 函数式组件  有状态的函数式组件 state   useState
+    
+Hook核心概念与应用
+    useState
+        每次渲染，函数都会重新执行。函数执行完毕，所有的内存都会释放掉。useState 
+        在函数内部创建一个当前函数组件的装填，提供了一个修改状态的方法。
+        useState(10) =>[count,setCount]
+    useEffect
+        总会执行一些副作用操作。函数组组件，纯函数，props，固定的输入总会得到固定的输出。
+        什么副作用？
+            只想渲染一个dom->dom渲染完了，还像执行一段逻辑(副作用)
+            没有发生在数据向视图转换过程中的逻辑。
+            ajax 访问原生dom对象，定时器
+            需要清除的，不需要清除的
+            hook之前，副作用都是不被允许的，
+        useEffect componentDidMound componentDidUpdate 相同的用图，  合并成api
+        useEffect(fn) 组件渲染到屏幕之后才会执行  返回   一个清除副作用的函数   不返回
+        一般是不需要同步的，   需要同步  useLayoutEffect
+        如何清除副作用？
+            componetWiilUnmount
+                返回   一个清除副作用的函数
+        
+    useContext
+        16更新了context api  
+            context 爷孙组件传值
+        useContext 使用context的能力
+        顶层的组件
+        context 和 useContext 组件之间的状态共享问题   redux   
+    useReducer redux
+        redux 
+        useState内部就是靠useReducer实现的。
+        useState的替代方案  (state,action) =>newState
+        接收三个参数  state,配套的dispatch
+        评估好当前应用场景
+    useRef
+        16 Object.createRed  创建ref的方法
+        {current:''}
+        访问dom节点  ，useEffect去操作dom
+    useMemo&useCallback
+        useMemo  把创建函数和依赖项数组作为参数传入useMemo  
+        useCallback 接收一个内联回调函数和一个依赖项数组
+            计算的缓存，记忆函数
+    自定义Hook
+        逻辑功能相同的片段-》封装成单独的函数来使用
+        自定义hook  函数  
+        自定义hook中可以调用官方提供的hook  useState
+        use开头，表示只能在函数组件中进行使用
+          use开头  ，
+          render props 高阶组件  redux
+          复用状态逻辑的方式，而不是复用state本身。
+          事实上Hook每次调用都有一个独立的state
+        抽离公共代码
+Hook使用规则
+    1.只能在最顶层使用hook
+        不要在循环，天剑，嵌套函数中调用hook,
+    2.只在REact函数中调用hook
+

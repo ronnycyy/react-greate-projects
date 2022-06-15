@@ -1,0 +1,66 @@
+
+Redux快速入门
+    
+什么是Redux?
+    props  一级一级  
+    state  组件内部状态管理
+    react->单向数据流
+    数据状态非常复杂-> 很难让两个组件进行通信->解决：把所有的state集中的组件的顶部->redux。
+    集中管理组件的状态，数据仓库
+    redux:js状态容器，提供可预测化的状态管理
+    react和redux是没有任何关系。redux就是一个独立的状态管理的库。(mobx状态管理库)
+     store->state tree->改变state的唯一方法store.dispatch触发一个action->reducer完成state更新。
+     组件可以派发dispatch action 行为  派发给store,
+     其它组件可以订阅store中的状态state来刷新自己的视图
+     
+     要点：应用中所有的state都以一个对象树的形式存储在一个单一的store中，唯一改变state的方式是派发action,
+        action：一个描述发生了什么的对象，动作，行为
+        reducer:为了描述action如何改变state树
+Redux的好处
+    props，单向数据流  ，一级一级
+    Redux解决的问题
+        多级传递数据的痛苦
+        相邻组件的数据传递->parent顶层组件，connect函数  react和redux的连接
+    redux可以将数据连接到任何组件
+        connect函数
+Redux的使用场景
+    公共组件，业务组件非常多，用户使用方式比较复杂，项目庞大
+    不同用户角色权限管理
+    需要与服务器大量的交互，聊天，直播等应用
+    view需要从多个来源获取数据
+    react解决不了的，多交互，多数据源，使用redux
+    注意：不要盲目引入redux,只会增加的复杂度。评估
+Redux是如何工作的
+    三大核心
+        action:描述发生了什么的一个对象，动作，指令，type {type:'add'},单独的模块，文件来存放action(项目规模变大后)，dispatch
+        reducer: 数据控制器，数据的修改者，actio.type,  具体做什么，返回一个newState
+                指定了应用状态(state)变化如何响应action并发送到store
+                注意：保持reducer纯净，纯函数，固定的输入一定有固定的输出。
+                    只要传入的参数相同，返回计算得到的下一个state一定相同。
+                副作用：ajax请求，
+        store:数据仓库
+            getState()
+            dispatch(action) 更新state
+            redux 只有一个单一的store。
+            进行拆分数据处理逻辑->不应该拆分store,应该拆分reducer.->combineReducers
+    使用的一般过程
+        创建reducer
+        创建action
+        创建store
+Redux的三大原则
+    1.单一数据源，
+        store ->全局变量对象
+    2.state是只读的
+        唯一改变方法是触发action,
+        确保视图和api请求都不能直接修改state,只能表达想要修改的意图，action,在reducer中进行集中化的处理
+    3.reducer使用纯函数执行修改
+        为了描述action如何改变state,
+实际应用
+    副作用操作
+        Redux-thunk,进行不纯的操作
+        thunk action
+        
+react hook  useReducer ==  redux    mobx  上手容易，学习成本低
+action reducer store  三大核心
+
+
